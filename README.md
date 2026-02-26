@@ -18,7 +18,7 @@ This project aims to predict customer churn for a telecommunications company usi
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/customer-churn-prediction.git
+   git clone https://github.com/vicentetajesgiancarlo/customer-churn-prediction.git
    cd customer-churn-prediction
    ```
 
@@ -36,7 +36,7 @@ This project aims to predict customer churn for a telecommunications company usi
 ## Usage
 
 ### 1. Analysis and Model Training
-Explore the `notebooks/churn_prediction.ipynb` to see the full data science pipeline, from EDA to model evaluation (XGBoost and Logistic Regression).
+Explore the `notebooks/churn_prediccion.ipynb` to see the full data science pipeline, from EDA to model evaluation (XGBoost and Logistic Regression).
 
 ### 2. Web Application
 To start the prediction web app, run:
