@@ -5,8 +5,7 @@ This project aims to predict customer churn for a telecommunications company usi
 ## Project Structure
 
 - `notebooks/`: Contains the Jupyter notebooks for data exploration, preprocessing, and model training.
-  - `churn_prediction.ipynb`: English version of the main analysis.
-  - `churn_prediccion.ipynb`: Original Spanish version of the analysis.
+  - `churn_prediccion.ipynb`: Main analysis in Spanish.
 - `app/`: A FastAPI web application to serve predictions.
   - `app.py`: Backend server logic.
   - `index.html`: Web interface.
