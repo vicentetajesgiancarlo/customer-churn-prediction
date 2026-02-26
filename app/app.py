@@ -8,11 +8,11 @@ import pandas as pd
 import numpy as np
 import os
 
-# --- Configuración de Rutas ---
+# Configuración de Rutas 
 DIR_BASE = os.path.dirname(os.path.abspath(__file__))
 CARPETA_MODELOS = os.path.join(DIR_BASE, "..", "models")
 
-# --- Carga de Inteligencia ---
+# Carga de Inteligencia 
 try:
     modelo_entrenado = joblib.load(os.path.join(CARPETA_MODELOS, 'model_xgb.joblib'))
     escalador = joblib.load(os.path.join(CARPETA_MODELOS, 'scaler.joblib'))
@@ -22,7 +22,6 @@ except Exception as error_carga:
 
 app = FastAPI(title="API de Predicción de Abandono")
 
-# Configuración de CORS para permitir conexión con el frontend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -67,14 +66,14 @@ async def predecir_abandono(entrada: DatosCliente):
         # Convertimos la entrada a un DataFrame de Pandas
         df_cliente = pd.DataFrame([entrada.dict()])
 
-        # 1. Mapeo manual para variables binarias (según el entrenamiento)
+        # 1. Mapeo manual para variables binarias 
         mapeo_binario = {'Yes': 1, 'No': 0, 'Male': 1, 'Female': 0}
         columnas_binarias = ['gender', 'Partner', 'Dependents', 'PhoneService', 'PaperlessBilling']
         
         for col in columnas_binarias:
             df_cliente[col] = df_cliente[col].map(mapeo_binario)
 
-        # 2. Creación de variables Dummies (One-Hot Encoding)
+        # 2. Creación de variables
         df_codificado = pd.get_dummies(df_cliente)
 
         # 3. Alineación con las columnas que el modelo espera
