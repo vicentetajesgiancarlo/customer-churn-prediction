@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Logs
+*.log
+error_spanish.txt
+server_log.txt
+
+# Models (Optional: usually ignored if large, but here they are part of the project. I'll include them for now unless they are very large)
+# models/*.joblib
+
+# Project specific
+app/__pycache__/

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChurnPredict Pro | Inteligencia Artificial para Retención</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <main class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                <span>ChurnPredict Pro</span>
+            </div>
+            <h1>Predicción de Abandono de Clientes</h1>
+            <p class="subtitle">Utiliza nuestro modelo XGBoost de alta precisión para identificar riesgos antes de que
+                sucedan.</p>
+        </header>
+
+        <section class="card glass">
+            <form id="predictionForm">
+                <div class="form-grid">
+                    <!-- Demografía -->
+                    <div class="field-group">
+                        <h3><i class="fas fa-user"></i> Demografía</h3>
+                        <div class="input-row">
+                            <label for="gender">Género</label>
+                            <select id="gender" name="gender" required>
+                                <option value="Female">Femenino</option>
+                                <option value="Male">Masculino</option>
+                            </select>
+                        </div>
+                        <div class="input-row">
+                            <label for="SeniorCitizen">Adulto Mayor</label>
+                            <select id="SeniorCitizen" name="SeniorCitizen" required>
+                                <option value="0">No</option>
+                                <option value="1">Sí</option>
+                            </select>
+                        </div>
+                        <div class="input-row">
+                            <label for="Partner">Tiene Pareja</label>
+                            <select id="Partner" name="Partner" required>
+                                <option value="Yes">Sí</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <div class="input-row">
+                            <label for="Dependents">Dependientes</label>
+                            <select id="Dependents" name="Dependents" required>
+                                <option value="Yes">Sí</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Servicios -->
+                    <div class="field-group">
+                        <h3><i class="fas fa-concierge-bell"></i> Servicios</h3>
+                        <div class="input-row">
+                            <label for="InternetService">Internet</label>
+                            <select id="InternetService" name="InternetService" required>
+                                <option value="Fiber optic">Fibra Óptica</option>
+                                <option value="DSL">DSL</option>
+                                <option value="No">Ninguno</option>
+                            </select>
+                        </div>
+                        <div class="input-row">
+                            <label for="OnlineSecurity">Seguridad Online</label>
+                            <select id="OnlineSecurity" name="OnlineSecurity" required>
+                                <option value="Yes">Sí</option>
+                                <option value="No">No</option>
+                                <option value="No internet service">Sin Internet</option>
+                            </select>
+                        </div>
+                        <div class="input-row">
+                            <label for="Contract">Contrato</label>
+                            <select id="Contract" name="Contract" required>
+                                <option value="Month-to-month">Mes a Mes</option>
+                                <option value="One year">Un Año</option>
+                                <option value="Two year">Dos Años</option>
+                            </select>
+                        </div>
+                        <div class="input-row">
+                            <label for="PaymentMethod">Método de Pago</label>
+                            <select id="PaymentMethod" name="PaymentMethod" required>
+                                <option value="Electronic check">Cheque Electrónico</option>
+                                <option value="Mailed check">Cheque por Correo</option>
+                                <option value="Bank transfer (automatic)">Transferencia Bancaria</option>
+                                <option value="Credit card (automatic)">Tarjeta de Crédito</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Métricas -->
+                    <div class="field-group">
+                        <h3><i class="fas fa-file-invoice-dollar"></i> Cuenta y Uso</h3>
+                        <div class="input-row">
+                            <label for="tenure">Meses de Antigüedad</label>
+                            <input type="number" id="tenure" name="tenure" min="0" max="100" value="12" required>
+                        </div>
+                        <div class="input-row">
+                            <label for="MonthlyCharges">Cargo Mensual ($)</label>
+                            <input type="number" step="0.01" id="MonthlyCharges" name="MonthlyCharges" value="70.0"
+                                required>
+                        </div>
+                        <div class="input-row">
+                            <label for="TotalCharges">Cargo Total ($)</label>
+                            <input type="number" step="0.01" id="TotalCharges" name="TotalCharges" value="840.0"
+                                required>
+                        </div>
+                        <!-- Inputs ocultos -->
+                        <input type="hidden" name="PhoneService" value="Yes">
+                        <input type="hidden" name="MultipleLines" value="No">
+                        <input type="hidden" name="OnlineBackup" value="No">
+                        <input type="hidden" name="DeviceProtection" value="No">
+                        <input type="hidden" name="TechSupport" value="No">
+                        <input type="hidden" name="StreamingTV" value="No">
+                        <input type="hidden" name="StreamingMovies" value="No">
+                        <input type="hidden" name="PaperlessBilling" value="Yes">
+                    </div>
+                </div>
+
+                <div class="submit-area">
+                    <button type="submit" id="predictBtn" class="btn-primary">
+                        <span>Analizar Riesgo</span>
+                        <i class="fas fa-microchip"></i>
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Resultado Section -->
+        <section id="resultCard" class="card glass result-hidden">
+            <div class="result-content">
+                <div class="gauge-container">
+                    <div class="gauge">
+                        <div class="gauge-fill" id="riskFill"></div>
+                        <div class="gauge-cover">
+                            <span id="riskPercent">0%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-text">
+                    <h2 id="resultLabel">Análisis completado</h2>
+                    <p id="resultDesc">Calculando probabilidad de abandono...</p>
+                    <div class="risk-badge" id="riskBadge">Riesgo Bajo</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="static/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,242 @@
+:root {
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --bg-light: #f8fafc;
+    --card-bg: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #0f172a;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.field-group h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.input-row {
+    margin-bottom: 1rem;
+}
+
+.input-row label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-main);
+    margin-bottom: 0.25rem;
+}
+
+select,
+input {
+    width: 100%;
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.6rem;
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+select:focus,
+input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.submit-area {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.2s;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+}
+
+.btn-primary.loading {
+    opacity: 0.7;
+    cursor: wait;
+}
+
+.result-hidden {
+    display: none;
+}
+
+.result-show {
+    display: block;
+    border-left: 4px solid var(--primary);
+}
+
+.result-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.gauge-container {
+    width: 100px;
+    height: 100px;
+}
+
+.gauge {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #f1f5f9;
+    position: relative;
+    overflow: hidden;
+}
+
+.gauge-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    background: var(--primary);
+    transition: height 1s ease-out;
+}
+
+.gauge-cover {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.result-text h2 {
+    font-size: 1.4rem;
+    margin-bottom: 0.25rem;
+}
+
+.result-text p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.risk-badge {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    background: #dcfce7;
+    color: #166534;
+}
+
+.risk-high {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.risk-medium {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+@media (max-width: 600px) {
+    .result-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}
