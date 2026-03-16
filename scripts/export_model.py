@@ -21,7 +21,6 @@ def export_model():
     # Preprocesamiento básico (idéntico al notebook)
     datos.drop(columns=['customerID'], inplace=True)
     datos['TotalCharges'] = pd.to_numeric(datos['TotalCharges'], errors='coerce')
-    datos['TotalCharges'].fillna(datos['TotalCharges'].median(), inplace=True)
     datos['Churn'] = datos['Churn'].map({'Yes': 1, 'No': 0})
 
     # Codificación de variables binarias
@@ -47,6 +46,10 @@ def export_model():
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=SEMILLA, stratify=y
     )
+
+    # Imputar TotalCharges con la mediana del entrenamiento (evita data leakage)
+    mediana_tc = X_train['TotalCharges'].median()
+    X_train['TotalCharges'].fillna(mediana_tc, inplace=True)
 
     # Escalamiento
     cols_escala = ['tenure', 'MonthlyCharges', 'TotalCharges']
